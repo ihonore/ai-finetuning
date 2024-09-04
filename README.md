@@ -1,30 +1,31 @@
-# **Step-by-Step Guide to Train LLaMA 3.1 Base Model using PyTorch and unsloth **
+## **Step-by-Step Guide to Train LLaMA 3.1 Base Model using PyTorch and unsloth**
 
-This guide will help you run and modify the Jupyter notebook for fine-tuning the LLaMA 3.1 base model, using your own local dataset. The environment (`base`) is already set up, so no need to install additional dependencies.
+This guide will help you run and modify the Jupyter notebook for fine-tuning the LLaMA 3.1 base model, using your own local dataset. The environment (`base`) is already set up, so no need to install additional dependencies unless required.
 
 ## **Step 1: Open the Downloads Folder in VS Code**
 
 1. Launch **Visual Studio Code**.
 2. Navigate to the Downloads folder where the notebook file `Llama_3_1_8b_+_Unsloth_2x_faster_finetuning.ipynb` is located.
-   
+
    You can do this by clicking **File > Open Folder** and selecting the `Downloads` folder or by running the following command in the terminal to open VS Code in that folder:
 
    ```bash
    code /home/{{username}}/Downloads/
    ```
+
 ## **Step 2: Activate the Virtual Environment (base)**
 
 activate the myenv environment in the terminal. You can do this within the VS Code terminal or an external terminal, You can also switch environments in VS Code editor:
 
 From the termal run:
 
-  ```bash
-  conda activate base
-  ```
+```bash
+conda activate base
+```
 
 ## **Step 3: Open the Jupyter Notebook in VS Code**
 
-1. Open the notebook Llama_3_1_8b_+_Unsloth_2x_faster_finetuning.ipynb
+1. Open the notebook Llama*3_1_8b*+\_Unsloth_2x_faster_finetuning.ipynb
 2. You should be able to see the notebook interface and the code cells. If you don't see it as a notebook, VS Code might prompt you to install the Jupyter extension.
 
 ## **Step 4: Modify the Dataset to Use Your Local Dataset**
