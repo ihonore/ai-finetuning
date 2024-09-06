@@ -47,3 +47,53 @@ Ensure that you replace /home/username with your actual Linux username.
 1. Start running the notebook cell by cell. You can do this by selecting each cell and clicking the `Run` button or using `Shift + Enter` to execute the cells sequentially.
 
 2. As you execute the cells, the notebook will load the model, preprocess the dataset, and start the fine-tuning process using the provided configurations.
+
+
+
+## **Pushing the Model to Hugging Face or Ollama**
+
+### **1. Pushing to Hugging Face Hub**
+
+In the notebook under the section **"Saving, loading finetuned models"**, you can either push the model to the Hugging Face Hub or save it locally. To push the model to Hugging Face, you will need to uncomment the provided lines and add your Hugging Face token.
+
+Here’s how to push the model and tokenizer to the Hugging Face Hub:
+
+```python
+# Uncomment these lines and replace "your_name/lora_model" with the name of your model
+# Add your Hugging Face token in place of the "..."
+model.push_to_hub("your_name/lora_model", token="your_huggingface_token")  # Push the model
+tokenizer.push_to_hub("your_name/lora_model", token="your_huggingface_token")  # Push the tokenizer
+```
+### **2. Pushing to Ollama**
+
+To push the model to Ollama, follow these steps:
+
+1. Convert the model to GGUF format: First, convert the fine-tuned model to the GGUF format using the section **"GGUF / llama.cpp Conversion"** in the notebook.
+
+In the notebook, you'll find these lines that allow you to save the GGUF model locally or push it to Hugging Face in GGUF format. Replace `False` with `True` in the code for the actions you want to perform.
+
+**For example**:
+
+```python
+# Save the GGUF model locally
+if True: 
+    model.save_pretrained_gguf("model", tokenizer, quantization_method="f16")
+
+# Push the GGUF model to Hugging Face
+if True: 
+    model.push_to_hub_gguf("hf/model", tokenizer, quantization_method="f16", token="your_huggingface_token")
+```
+2. Edit the Modelfile for Ollama:
+- Locate the Modelfile in the Downloads folder.
+- Open the Modelfile in VsCode and edit the `FROM` path to point to your new GGUF model directory. For example:
+
+```bash
+FROM /home/username/Downloads/model/gguf_model_name.gguf
+```
+3. **Push the model to Ollama**: After editing the Modelfile, open the terminal in the `Downloads` directory and run the following command to create the model in Ollama:
+
+```bash
+ollama create -f Modelfile rtila/name_of_the_model
+```
+
+By following these steps, you can successfully push your model either to Hugging Face or Ollama after fine-tuning.
