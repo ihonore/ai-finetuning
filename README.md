@@ -1,4 +1,4 @@
-## **Step-by-Step Guide to Train LLaMA 3.1 Base Model using PyTorch and unsloth**
+## **Step-by-Step Guide to Train LLaMA 3.1 Base Model using PyTorch and unsloth on your data**
 
 This guide will help you run and modify the Jupyter notebook for fine-tuning the LLaMA 3.1 base model, using your own local dataset. The environment (`base`) is already set up, so no need to install additional dependencies unless required.
 
@@ -48,8 +48,6 @@ Ensure that you replace /home/username with your actual Linux username.
 
 2. As you execute the cells, the notebook will load the model, preprocess the dataset, and start the fine-tuning process using the provided configurations.
 
-
-
 ## **Pushing the Model to Hugging Face or Ollama**
 
 ### **1. Pushing to Hugging Face Hub**
@@ -64,6 +62,7 @@ Here’s how to push the model and tokenizer to the Hugging Face Hub:
 model.push_to_hub("your_name/lora_model", token="your_huggingface_token")  # Push the model
 tokenizer.push_to_hub("your_name/lora_model", token="your_huggingface_token")  # Push the tokenizer
 ```
+
 ### **2. Pushing to Ollama**
 
 To push the model to Ollama, follow these steps:
@@ -76,20 +75,23 @@ In the notebook, you'll find these lines that allow you to save the GGUF model l
 
 ```python
 # Save the GGUF model locally
-if True: 
+if True:
     model.save_pretrained_gguf("model", tokenizer, quantization_method="f16")
 
 # Push the GGUF model to Hugging Face
-if True: 
+if True:
     model.push_to_hub_gguf("hf/model", tokenizer, quantization_method="f16", token="your_huggingface_token")
 ```
+
 2. Edit the Modelfile for Ollama:
+
 - Locate the Modelfile in the Downloads folder.
 - Open the Modelfile in VsCode and edit the `FROM` path to point to your new GGUF model directory. For example:
 
 ```bash
 FROM /home/username/Downloads/model/gguf_model_name.gguf
 ```
+
 3. **Push the model to Ollama**: After editing the Modelfile, open the terminal in the `Downloads` directory and run the following command to create the model in Ollama:
 
 ```bash
